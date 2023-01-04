@@ -1,8 +1,12 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class SettingScreen extends StatefulWidget {
   @override
-  State<SettingScreen> createState() => _SettingScreenPageState();
+  State<SettingScreen> createState() {
+    return _SettingScreenPageState();
+  }
 }
 
 class _SettingScreenPageState extends State<SettingScreen> {
@@ -14,11 +18,6 @@ class _SettingScreenPageState extends State<SettingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

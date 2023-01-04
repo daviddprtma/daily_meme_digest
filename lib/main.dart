@@ -1,10 +1,11 @@
 import 'dart:ui';
 
+import 'package:daily_meme_digest/screen/addMeme.dart';
 import 'package:daily_meme_digest/screen/home.dart';
 import 'package:daily_meme_digest/screen/leaderboard.dart';
-import 'package:daily_meme_digest/screen/my_creation.dart';
+import 'package:daily_meme_digest/screen/login.dart';
+import 'package:daily_meme_digest/screen/myCreation.dart';
 import 'package:daily_meme_digest/screen/setting.dart';
-import 'package:daily_meme_digest/screen/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,15 +13,15 @@ String active_user = "";
 
 Future<String> checkUser() async {
   final prefs = await SharedPreferences.getInstance();
-  String username = prefs.getString("username") ?? '';
-  return username;
+  String user_name = prefs.getString("user_name") ?? '';
+  return user_name;
 }
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   checkUser().then((String result) {
     if (result == '') {
-      runApp(MyWelcome());
+      runApp(MyLogin());
     } else {
       active_user = result;
       runApp(const MyApp());
@@ -30,7 +31,7 @@ void main() {
 
 void doLogout() async {
   final prefs = await SharedPreferences.getInstance();
-  prefs.remove('username');
+  prefs.remove('user_name');
   main();
 }
 
@@ -45,10 +46,15 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(primarySwatch: Colors.grey),
         home: const MyHomePage(title: 'Daily Meme Digest'),
         routes: {
-          'home': (context) => HomeScreen(),
+          'home': (context) => HomeScreen(
+                user_name: active_user,
+              ),
+          'addmeme': (context) => AddMeme(
+                user_name: active_user,
+              ),
           'leaderboard': (context) => LeaderboardScreen(),
-          'mycreation': (context) => MyCreationScreen(),
-          'setting': (context) => SettingScreen()
+          'mycreation': (context) => MyCreationScreen(user_name: active_user),
+          'setting': (context) => SettingScreen(),
         });
   }
 }
@@ -65,13 +71,22 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currIdx = 0;
   final List<Widget> _screens = [
-    HomeScreen(),
+    HomeScreen(
+      user_name: active_user,
+    ),
     LeaderboardScreen(),
-    MyCreationScreen(),
+    MyCreationScreen(
+      user_name: active_user,
+    ),
     SettingScreen()
   ];
 
-  final List _titles = ['Home', 'My Creation', 'Leaderboard', 'Setting'];
+  final List _titles = [
+    'Daily Meme Digest',
+    'My Creation',
+    'Leaderboard',
+    'Setting'
+  ];
 
   blurImage() {
     ClipRRect(
@@ -164,9 +179,6 @@ class _MyHomePageState extends State<MyHomePage> {
           _currIdx = index;
         });
       },
-      selectedIconTheme: IconThemeData(color: Colors.black),
-      unselectedIconTheme: IconThemeData(color: Colors.grey),
-      showUnselectedLabels: true,
       type: BottomNavigationBarType.fixed,
     );
   }
