@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:daily_meme_digest/class/geteaderboard.dart';
+import 'package:daily_meme_digest/class/getleaderboard.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
