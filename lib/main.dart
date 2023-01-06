@@ -74,10 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
     HomeScreen(
       user_name: active_user,
     ),
-    LeaderboardScreen(),
     MyCreationScreen(
       user_name: active_user,
     ),
+    LeaderboardScreen(),
     SettingScreen()
   ];
 

@@ -224,6 +224,9 @@ class _HomeScreenPageState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Daily meme Digest"),
+      ),
       body: ListView(
         children: <Widget>[
           Container(

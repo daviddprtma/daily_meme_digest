@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:daily_meme_digest/class/meme.dart';
 import 'package:daily_meme_digest/screen/home.dart';
@@ -63,7 +64,8 @@ class _MyCreationScreenPageState extends State<MyCreationScreen> {
                             height: 300,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                    image: NetworkImage(myCreation[idx].link_meme),
+                                    image:
+                                        NetworkImage(myCreation[idx].link_meme),
                                     fit: BoxFit.fill)),
                           ),
                           Container(
@@ -139,13 +141,16 @@ class _MyCreationScreenPageState extends State<MyCreationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text('My Creation'),
+        ),
         body: ListView(
-      children: <Widget>[
-        Container(
-          height: MediaQuery.of(context).size.height,
-          child: MyCreationMeme(myCreationMeme),
-        )
-      ],
-    ));
+          children: <Widget>[
+            Container(
+              height: MediaQuery.of(context).size.height,
+              child: MyCreationMeme(myCreationMeme),
+            )
+          ],
+        ));
   }
 }

@@ -91,6 +91,9 @@ class _LeaderboardScreenPageState extends State<LeaderboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Leaderboard"),
+      ),
       body: ListView(
         children: <Widget>[
           Container(
